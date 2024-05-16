@@ -1,7 +1,7 @@
 <x-auth-layout>
     <section class="bg-white dark:bg-gray-900">
         <div class="container flex items-center justify-center min-h-screen px-6 mx-auto">
-            <x-auth-form>
+            <x-auth-form :action="route('login.post')">
                 <div class="relative flex items-center mt-6">
                 <span class="absolute">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500"
@@ -11,9 +11,15 @@
                     </svg>
                 </span>
 
-                    <input type="email"
-                           class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                           placeholder="Email address" name="email">
+                    <div class="w-full flex flex-col">
+                        <input type="text"
+                               class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                               placeholder="Email/Username" name="email">
+                        @error('email')
+                        <small class="text-red-500">{{ $message }}</small>
+                        @enderror
+                    </div>
+
                 </div>
 
                 <div class="relative flex items-center mt-4">
@@ -25,13 +31,19 @@
                     </svg>
                 </span>
 
-                    <input type="password"
-                           class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                           placeholder="Password" name="password">
+                    <div class="w-full flex flex-col">
+                        <input type="password"
+                               class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                               placeholder="Password" name="password">
+                        @error('password')
+                        <small class="text-red-500">{{ $message }}</small>
+                        @enderror
+                    </div>
                 </div>
 
                 <div class="mt-6">
                     <button
+                        type="submit"
                         class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
                         Sign In
                     </button>

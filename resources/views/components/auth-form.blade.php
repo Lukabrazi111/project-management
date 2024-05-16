@@ -1,4 +1,6 @@
-<form class="w-full max-w-md">
+<form method="POST" action="{{ $action ?? '#' }}" class="w-full max-w-md">
+    @csrf
+
     <div class="flex justify-center mx-auto">
         <img class="w-auto h-7 sm:h-8" src="https://merakiui.com/images/logo.svg" alt="">
     </div>
@@ -14,5 +16,10 @@
             sign up
         </a>
     </div>
+
+    @if(session()->has('error'))
+        <div
+            class="mt-6 bg-red-400 rounded px-2 py-2 text-center text-white font-medium">{{ session()->get('error') }}</div>
+    @endif
     {{ $slot }}
 </form>

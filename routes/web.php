@@ -1,17 +1,19 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::redirect('/', '/login');
+Route::redirect('/', '/dashboard');
 
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
+Route::get('/login', [AuthController::class, 'createLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::get('/register', [AuthController::class, 'createRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 
-Route::get('/register', function () {
-    return view('auth.register');
-})->name('register');
-
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
 
 // TODO: add middleware for authenticated | verified users
