@@ -15,5 +15,3 @@ Route::post('/register', [AuthController::class, 'register'])->name('register.po
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
-
-// TODO: add middleware for authenticated | verified users

@@ -1,4 +1,4 @@
-<form method="POST" action="{{ $action ?? '#' }}" class="w-full max-w-md">
+<form method="POST" action="{{ $action ?? '#' }}" enctype="multipart/form-data" class="w-full max-w-md">
     @csrf
 
     <div class="flex justify-center mx-auto">
@@ -20,6 +20,10 @@
     @if(session()->has('error'))
         <div
             class="mt-6 bg-red-400 rounded px-2 py-2 text-center text-white font-medium">{{ session()->get('error') }}</div>
+    @elseif(session()->has('success'))
+        <div
+            class="mt-6 bg-green-400 rounded px-2 py-2 text-center text-white font-medium">{{ session()->get('success') }}</div>
     @endif
+
     {{ $slot }}
 </form>
