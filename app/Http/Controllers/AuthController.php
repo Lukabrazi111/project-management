@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Mail\RegisterEmail;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\URL;
 
 class AuthController extends Controller
 {
@@ -27,9 +31,26 @@ class AuthController extends Controller
     }
 
     /**
+     * Create view page of email verification
+     *
+     * @param $user
+     */
+    public function createEmailVerified(User $user)
+    {
+        if ($user->hasVerifiedEmail()) {
+            return redirect()->route('login')->with('error', __('auth.already_verified'));
+        }
+
+        $user->markEmailAsVerified();
+
+        return view('auth.email-verified', ['user' => $user]);
+    }
+
+    /**
      * Authorize user in the system
      *
      * @param LoginRequest $request
+     * @return RedirectResponse
      */
     public function login(LoginRequest $request)
     {
@@ -111,7 +132,10 @@ class AuthController extends Controller
             'image_path' => $imagePath ?? null,
         ]);
 
-        // TODO: Send email to user
+        // TODO: check temporary url and update route if needed
+        $verifyUrl = URL::temporarySignedRoute('email.verified', now()->addSecond(), ['user' => $user->id]);
+
+        Mail::to($user->email)->send(new RegisterEmail($user, $verifyUrl));
 
         return redirect()->route('login')
             ->with('success', __('auth.register_email_sent', ['email' => $user->email]));

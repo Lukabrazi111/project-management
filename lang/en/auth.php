@@ -19,5 +19,7 @@ return [
     'register_email_sent' => 'You have been registered, verify your email :email to activate your account',
     'not_verified' => 'Please verify your account',
     'not_found' => 'User not found',
+    'successfully_verified' => 'Your account is successfully verified',
+    'already_verified' => 'Your account is already verified',
 
 ];
