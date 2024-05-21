@@ -7,6 +7,7 @@ use App\Http\Requests\RegisterRequest;
 use App\Mail\RegisterEmail;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
@@ -35,8 +36,13 @@ class AuthController extends Controller
      *
      * @param $user
      */
-    public function createEmailVerified(User $user)
+    public function createEmailVerified(User $user, Request $request)
     {
+        // Validate verification signature
+        if(! $request->hasValidSignature()) {
+            abort(401);
+        }
+
         if ($user->hasVerifiedEmail()) {
             return redirect()->route('login')->with('error', __('auth.already_verified'));
         }
@@ -133,7 +139,7 @@ class AuthController extends Controller
         ]);
 
         // TODO: check temporary url and update route if needed
-        $verifyUrl = URL::temporarySignedRoute('email.verified', now()->addSecond(), ['user' => $user->id]);
+        $verifyUrl = URL::temporarySignedRoute('email.verified', now()->addMinutes(30), ['user' => $user->id]);
 
         Mail::to($user->email)->send(new RegisterEmail($user, $verifyUrl));
 
