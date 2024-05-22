@@ -39,7 +39,7 @@ class AuthController extends Controller
     public function createEmailVerified(User $user, Request $request)
     {
         // Validate verification signature
-        if(! $request->hasValidSignature()) {
+        if (!$request->hasValidSignature()) {
             abort(401);
         }
 
@@ -138,7 +138,6 @@ class AuthController extends Controller
             'image_path' => $imagePath ?? null,
         ]);
 
-        // TODO: check temporary url and update route if needed
         $verifyUrl = URL::temporarySignedRoute('email.verified', now()->addMinutes(30), ['user' => $user->id]);
 
         Mail::to($user->email)->send(new RegisterEmail($user, $verifyUrl));

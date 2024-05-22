@@ -8,10 +8,24 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet"/>
 
     @vite('resources/css/app.css')
 </head>
 <body>
 {{ $slot }}
+
+<script>
+    const menu = document.getElementById('user-menu');
+
+    document.getElementById('user-menu-button').addEventListener('click', function (e) {
+        menu.classList.toggle('hidden');
+    });
+
+    menu.addEventListener('click', function (e) {
+        if (e.target.id === 'user-menu-item') {
+            menu.classList.add('hidden');
+        }
+    });
+</script>
 </body>
