@@ -22,6 +22,6 @@ class AuthForm extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.auth-form', ['action' => $this->action]);
+        return view('components.auth.form', ['action' => $this->action]);
     }
 }

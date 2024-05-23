@@ -1,7 +1,7 @@
-<x-auth-layout>
+<x-auth.layout>
     <section class="bg-white dark:bg-gray-900">
         <div class="container flex items-center justify-center min-h-screen px-6 mx-auto">
-            <x-auth-form :action="route('login.post')">
+            <x-auth.form :action="route('login.post')">
                 <div class="relative flex items-center mt-6">
                 <span class="absolute">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500"
@@ -55,7 +55,7 @@
                         </a>
                     </div>
                 </div>
-            </x-auth-form>
+            </x-auth.form>
         </div>
     </section>
-</x-auth-layout>
+</x-auth.layout>
