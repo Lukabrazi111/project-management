@@ -138,7 +138,7 @@ class AuthController extends Controller
             'image_path' => $imagePath ?? null,
         ]);
 
-        $verifyUrl = URL::temporarySignedRoute('email.verified', now()->addMinutes(30), ['user' => $user->id]);
+        $verifyUrl = URL::temporarySignedRoute('email.verified', now()->addMinutes(15), ['user' => $user->id]);
 
         Mail::to($user->email)->send(new RegisterEmail($user, $verifyUrl));
 

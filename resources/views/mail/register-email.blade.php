@@ -22,7 +22,7 @@
 <div>
     <p>Hey {{ $user->username }},</p>
     <p class="signature">Please verify your account here -> <a href="{{ $verifyUrl }}">Verify</a></p>
-    <small>The verification link expires in 30 minutes</small>
+    <small>The verification link expires in 15 minutes</small>
 </div>
 </body>
 </html>

@@ -10,10 +10,14 @@
                               d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                     </svg>
                 </span>
-
-                    <input type="text"
-                           class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                           placeholder="Username" name="username">
+                    <div class="w-full flex flex-col">
+                        <input type="text"
+                               class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                               placeholder="Username" name="username">
+                        @error('username')
+                        <small class="text-red-500">{{ $message }}</small>
+                        @enderror
+                    </div>
                 </div>
 
                 <label for="dropzone-file"
@@ -24,9 +28,13 @@
                               d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
                     </svg>
 
-                    <h2 class="mx-3 text-gray-400">Profile Photo</h2>
-
-                    <input id="dropzone-file" type="file" class="hidden" name="image"/>
+                    <h2 class="mx-3 text-gray-400 text-nowrap">Profile Photo</h2>
+                    <div class="w-full flex flex-col">
+                        <input id="dropzone-file" type="file" class="hidden" name="image"/>
+                        @error('image')
+                        <small class="text-red-500">{{ $message }}</small>
+                        @enderror
+                    </div>
                 </label>
 
                 <div class="relative flex items-center mt-6">
@@ -38,9 +46,14 @@
                     </svg>
                 </span>
 
-                    <input type="email"
-                           class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                           placeholder="Email address" name="email">
+                    <div class="w-full flex flex-col">
+                        <input type="email"
+                               class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                               placeholder="Email address" name="email">
+                        @error('email')
+                        <small class="text-red-500">{{ $message }}</small>
+                        @enderror
+                    </div>
                 </div>
 
                 <div class="relative flex items-center mt-4">
@@ -52,9 +65,14 @@
                     </svg>
                 </span>
 
-                    <input type="password"
-                           class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                           placeholder="Password" name="password">
+                    <div class="w-full flex flex-col">
+                        <input type="password"
+                               class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                               placeholder="Password" name="password">
+                        @error('password')
+                        <small class="text-red-500">{{ $message }}</small>
+                        @enderror
+                    </div>
                 </div>
 
                 <div class="relative flex items-center mt-4">
@@ -66,9 +84,14 @@
                     </svg>
                 </span>
 
-                    <input type="password"
-                           class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                           placeholder="Confirm Password" name="password_confirmation">
+                    <div class="w-full flex flex-col">
+                        <input type="password"
+                               class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                               placeholder="Confirm Password" name="password_confirmation">
+                        @error('password_confirmation')
+                        <small class="text-red-500">{{ $message }}</small>
+                        @enderror
+                    </div>
                 </div>
 
                 <div class="mt-6">

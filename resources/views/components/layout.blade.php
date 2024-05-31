@@ -13,6 +13,18 @@
     @vite('resources/css/app.css')
 </head>
 <body>
+<!-- Main navigation container -->
+<nav class="bg-gray-800">
+    <x-container>
+        <div class="relative flex h-16 items-center justify-between">
+            <x-nav-bar.links/>
+
+            <x-nav-bar.profile/>
+        </div>
+    </x-container>
+
+</nav>
+
 {{ $slot }}
 
 <script>
