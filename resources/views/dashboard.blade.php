@@ -3,7 +3,13 @@
 
     <div class="absolute w-full h-screen bg-gray-900">
         <x-container>
-            <x-dashboard.status-tasks/>
+            <x-dashboard.status-tasks :totalPendingTasks="$totalPendingTasks"
+                                      :userPendingTasks="$userPendingTasks"
+                                      :totalInProgressTasks="$totalInProgressTasks"
+                                      :userInProgressTasks="$userInProgressTasks"
+                                      :totalCompletedTasks="$totalCompletedTasks"
+                                      :userCompletedTasks="$userCompletedTasks"
+            />
 
             <div class="flex flex-col bg-gray-800 mt-6 rounded-md">
                 <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -23,18 +29,30 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="text-white">
-                                    <td class="whitespace-nowrap px-6 py-4 font-medium">1</td>
-                                    <td class="whitespace-nowrap px-6 py-4">Mark</td>
-                                    <td class="whitespace-nowrap px-6 py-4">Otto</td>
-                                    <td class="whitespace-nowrap px-6 py-4">@mdo</td>
-                                    <td class="whitespace-nowrap px-6 py-4">2025-04-05</td>
-                                </tr>
+                                @foreach($tasksWithProject as $task)
+                                    <tr class="text-white">
+                                        <td class="whitespace-nowrap px-6 py-4 font-medium">{{ $task->id }}</td>
+                                        <td class="whitespace-nowrap px-6 py-4"><a
+                                                href="#"
+                                                class="text-blue-600 underline">{{ $task->project->name }}</a>
+                                        </td>
+                                        <td class="whitespace-nowrap px-6 py-4"><a href="#"
+                                                                                   class="text-blue-600 underline">{{ $task->name }}</a>
+                                        </td>
+                                        <td class="rounded-md whitespace-nowrap px-1 py-2 text-white font-medium text-center {{ config('taskstatuses.' . $task->status)['class'] }}">
+                                            {{ config('taskstatuses.' . $task->status)['text'] }}
+                                        </td>
+                                        <td class="whitespace-nowrap px-6 py-4">{{ $task->due_date }}</td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="flex justify-center items-center mt-3">
+                {{ $tasksWithProject->links() }}
             </div>
         </x-container>
     </div>
