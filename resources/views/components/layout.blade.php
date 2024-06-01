@@ -12,7 +12,7 @@
 
     @vite('resources/css/app.css')
 </head>
-<body>
+<body class="bg-gray-900">
 <!-- Main navigation container -->
 <nav class="bg-gray-800">
     <x-container>

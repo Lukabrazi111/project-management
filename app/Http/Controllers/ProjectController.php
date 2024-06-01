@@ -10,9 +10,22 @@ class ProjectController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $projects = Project::query();
+
+        $sortColumn = config('sortcolumns.projects');
+
+        // todo: need to research about it how to properly sort and filter data
+        foreach ($sortColumn as $column) {
+            if ($request->input('sort') == $column) {
+                $projects->orderBy($column, 'desc');
+            }
+        }
+
+        $projects = $projects->paginate(5);
+
+        return view('projects', compact('projects'));
     }
 
     /**

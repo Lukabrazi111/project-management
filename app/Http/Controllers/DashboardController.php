@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\TaskStatusEnum;
 use App\Models\Task;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,16 +16,16 @@ class DashboardController extends Controller
         $user = Auth::user();
 
         // pending tasks
-        $totalPendingTasks = $this->getTaskCount('pending');
-        $userPendingTasks = $this->getTaskCount('pending', $user);
+        $totalPendingTasks = $this->getTaskCount(TaskStatusEnum::PENDING);
+        $userPendingTasks = $this->getTaskCount(TaskStatusEnum::PENDING, $user);
 
         // in progress tasks
-        $totalInProgressTasks = $this->getTaskCount('in_progress');
-        $userInProgressTasks = $this->getTaskCount('in_progress', $user);
+        $totalInProgressTasks = $this->getTaskCount(TaskStatusEnum::IN_PROGRESS);
+        $userInProgressTasks = $this->getTaskCount(TaskStatusEnum::IN_PROGRESS, $user);
 
         // completed tasks
-        $totalCompletedTasks = $this->getTaskCount('completed');
-        $userCompletedTasks = $this->getTaskCount('completed', $user);
+        $totalCompletedTasks = $this->getTaskCount(TaskStatusEnum::COMPLETED);
+        $userCompletedTasks = $this->getTaskCount(TaskStatusEnum::COMPLETED, $user);
 
         $tasksWithProject = Task::query()
             ->with('project')
@@ -42,6 +43,13 @@ class DashboardController extends Controller
         ));
     }
 
+    /**
+     * Get tasks count
+     *
+     * @param $status
+     * @param $user
+     * @return int
+     */
     private function getTaskCount($status, $user = null)
     {
         $tasks = Task::query()->where('status', $status);

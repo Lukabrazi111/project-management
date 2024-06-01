@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -18,4 +19,6 @@ Route::get('/verify-email/{user}', [AuthController::class, 'createEmailVerified'
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('/projects', [ProjectController::class, 'index'])->name('projects');
 });

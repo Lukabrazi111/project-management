@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'pending' => ['text' => 'Pending', 'class' => 'bg-yellow-500'],
-    'in_progress' => ['text' => 'In Progress', 'class' => 'bg-blue-500'],
-    'completed' => ['text' => 'Completed', 'class' => 'bg-green-500'],
+    'pending' => ['text' => 'Pending', 'class' => 'text-yellow-500'],
+    'in_progress' => ['text' => 'In Progress', 'class' => 'text-blue-500'],
+    'completed' => ['text' => 'Completed', 'class' => 'text-green-500'],
 ];
